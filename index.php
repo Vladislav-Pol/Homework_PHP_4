@@ -141,7 +141,13 @@ echo "Сумма элементов массива равна - " . getSumArrayE
 echo "<hr> Задание 12 <br/><br/>";
 
 $array = array(1,1,1,2,2,2,2,3);
-//todo
+$arrayNew = [];
+
+foreach($array as $item){
+    if(!in_array($item, $arrayNew))
+        $arrayNew[] = $item;
+}
+ echo implode(",", $arrayNew);
 
 //13. Используя ассоциативный массив, добавить на страницу навигационное
 //меню вида:

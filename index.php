@@ -218,10 +218,22 @@ print_r($arr);
 //[48,9,0,4,21,2,1,0,8,84,76,8,4,13,2] или [1,8,0,13,76,8,7,0,22,0,2,3,2]
 echo "<hr> Задание 16 <br/><br/>";
 
-$arr = [48,9,0,4,21,2,1,0,8,84,76,8,4,13,2];
-$firstPos = array_search(0, $arr);
-$lastPos = 0;
-//todo
+$arr1 = [48,9,0,4,21,2,1,0,8,84,76,8,4,13,2];
+$arr2 = [1,8,0,13,76,8,7,0,22,0,2,3,2];
+
+function getSumBetween($arr, $value){
+    $arKeys = array_keys($arr, $value);
+    if(count($arKeys) < 2)
+        return 0;
+    $firstKey = current($arKeys);
+    $countElementsForSum = end($arKeys) - ($firstKey + 1);
+    $arrForSum = array_slice($arr, ($firstKey + 1), $countElementsForSum);
+    return array_sum($arrForSum);
+}
+
+echo getSumBetween($arr1, 0);
+echo "<br/>";
+echo getSumBetween($arr2, 0);
 
 //17. Сделайте функцию, которая будет генерировать случайный цвет в hex
 //(dechex) формате (типа #ffffff).
@@ -246,9 +258,12 @@ echo preg_replace('/(.)\1{1,}/', "!", $string);
 //него. Функция должна возвращать true или false.
 echo "<hr> Задание 19 <br/><br/>";
 
-//todo
+$regCheckPhone1 = '/^\+375\s?\(?\s?\d{2}\s?\)?\s?\W?(\d\W?){7}$/'; //Проверка на полный номер телефона, начинающийся с "+375", с двузначным кодом оператора и 7-ми значным номером, код оператора может быть обернут скобками, а номер разделен людыми нетекстовыми символами
+$regCheckPhone2 = '/^(\+375\s?)?(\(?\s?\d{2}\s?\)?)?\s?\W?(\d\W?){7}$/'; //в отличии от первой проверки допускается отсутствие кода страны и кода оператора
+$phone = "+375 (29) 123 12-21";
 
-
+var_dump(preg_match($regCheckPhone1, $phone));
+var_dump(preg_match($regCheckPhone2, $phone));
 
 //20. Напишите ф-цию, которая должна проверить правильность ввода адреса
 //эл. почты. Почта верна при условии:
